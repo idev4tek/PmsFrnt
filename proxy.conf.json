@@ -1,0 +1,10 @@
+{
+    "/_auth": {
+      "target": "http://144.217.155.167:8085/auth",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/_auth": ""
+      }
+    }
+  }

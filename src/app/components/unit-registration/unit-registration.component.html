@@ -1,0 +1,635 @@
+<!-- ============================================================== -->
+<!-- row -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Card Grid-->
+<!-- ============================================================== -->
+<div fxLayout="row wrap">
+    <div fxFlex.gt-sm="100" fxFlex="100">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-title>Unit Registratoin:</mat-card-title>
+          <!-- ============================================================== -->
+          <!-- column -->
+          <!-- ============================================================== -->
+          <form class="basic-form">
+            <div fxLayout="row wrap" fxFlexAlign="center" class="row">
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                  <mat-form-field>
+                    <input matInput placeholder="Registratoin #.">
+                  </mat-form-field>
+                </div>
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                  <mat-form-field>
+                    <input matInput placeholder="Product:">
+                  </mat-form-field>
+                </div>
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                  <mat-form-field>
+                    <input matInput placeholder="Type:">
+                  </mat-form-field>
+                </div>
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                  <mat-form-field>
+                    <input matInput placeholder="Sub Type:">
+                  </mat-form-field>
+                </div> 
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                  <mat-form-field>
+                    <input matInput placeholder="Plot #.">
+                  </mat-form-field>
+                </div>
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                  <mat-form-field>
+                    <input matInput placeholder="House #.">
+                  </mat-form-field>
+                </div>
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                  <mat-form-field>
+                    <input matInput placeholder="Floor:">
+                  </mat-form-field>
+                </div>
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                  <mat-form-field>
+                    <input matInput placeholder="Unit:">
+                  </mat-form-field>
+                </div>  
+                <mat-card-subtitle>Features:</mat-card-subtitle>                
+                <!-- column -->
+                <div fxFlex.gt-sm="100" fxFlex="100" class="m-t-10 m-b-10 m-l-10">
+                    <mat-checkbox color="primary" class="m-r-10">Corner</mat-checkbox>
+                    <mat-checkbox color="warn" class="m-r-10">Park Facing</mat-checkbox>
+                    <!-- <mat-checkbox color="accent">Checkbox</mat-checkbox> -->
+                </div>            
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+<!-- 
+    
+                            <div fxLayout="row wrap" fxFlexAlign="center" class="row">
+                                
+                                <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
+                                    <mat-form-field>
+                                        <input matInput placeholder="Last name, First name" required>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div fxFlex.gt-sm="100" fxFlex="100" class="m-t-10 m-b-10">
+                                    <button mat-raised-button color="primary" (click)="openDialog()">Open Dialog
+                                    </button>
+                                </div>
+                            </div>
+ -->
+
+<!-- <ng-container *ngTemplateOutlet="customerBuyerAdd"></ng-container> -->
+
+<ng-template #firstStepForm>    
+    <mat-card-subtitle class="card_sub_heading">Unit Information:</mat-card-subtitle>
+    <div fxLayout="row wrap" fxFlexAlign="center" class="row" [formGroup]="firstFormGroup">
+
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Registration #." formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Type:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Sub Type:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Features:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Area:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Price per unit:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Payment Plan:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Base Price:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Charges:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Discount:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Net Payable:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
+            <mat-card-subtitle class="card_sub_heading">Customer/Buyer:</mat-card-subtitle>
+        </div>
+        <div fxFlex.gt-sm="100" fxFlex="100" fxLayoutAlign="end start" class="m-t-10 m-b-10">
+            <button mat-raised-button color="primary" (click)="openDialog()">+ Add
+            </button>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="CNIC #." formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Name:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Father/Husband Name:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Mobile #." formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="DOB:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
+            <mat-form-field>
+                <input matInput placeholder="Present Address:" formControlName="firstCtrl"
+                    required>
+            </mat-form-field>
+        </div>
+        <mat-card-subtitle class="card_sub_heading">Charges:</mat-card-subtitle>
+        <div fxFlex.gt-sm="100" fxFlex="100" fxLayoutAlign="end start" class="m-t-10 m-b-10">
+            <button mat-raised-button color="primary" (click)="openDialog()">+ Add
+            </button>
+        </div>
+        <ng-container class="row" *ngFor="let _l of l">
+            <div fxFlex.gt-sm="100" fxLayout="row wrap" fxFlexAlign="center" class="row" fxFlex="100" class="p-10">
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Charge ID:" formControlName="firstCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Calculated Amount:" formControlName="firstCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Actual Amount" formControlName="firstCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Payment Scheme:" formControlName="firstCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Status:" formControlName="firstCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="75" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Description:" formControlName="firstCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+            </div>
+        </ng-container>
+        <!-- single line add button with heading
+        <div fxFlex.gt-sm="100" fxLayout="row wrap" fxFlexAlign="center" class="row" fxFlex="100" class="p-10">
+            <mat-card-subtitle fxFlex.gt-sm="25" class="card_sub_heading">Charges:</mat-card-subtitle>
+            <div fxFlex.gt-sm="75" fxFlex="100" fxLayoutAlign="end start" class="m-t-10 m-b-10">
+                <button mat-raised-button color="primary" (click)="openDialog()">+ Add
+                </button>
+            </div>
+        </div> -->
+
+        
+        <mat-card-subtitle class="card_sub_heading">Down Payment/Discount:</mat-card-subtitle>
+        <div fxFlex.gt-sm="100" fxFlex="100" fxLayoutAlign="end start" class="m-t-10 m-b-10">
+            <button mat-raised-button color="primary" (click)="openDialog()">+ Add
+            </button>
+        </div>
+        <ng-container class="row" *ngFor="let _l of l">
+            <div fxFlex.gt-sm="100" fxLayout="row wrap" fxFlexAlign="center" class="row" fxFlex="100" class="p-10">
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="ID:" formControlName="firstCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Name:" formControlName="firstCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Actual Amount" formControlName="firstCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Calculated Amount:" formControlName="firstCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Status:" formControlName="firstCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #secondStepForm>
+    <mat-card-subtitle class="card_sub_heading">Down Payment/Discount:</mat-card-subtitle>
+    
+    <div fxLayout="row wrap" fxFlexAlign="center" class="row" [formGroup]="secondFormGroup">
+        <div fxFlex.gt-sm="100" fxFlex="100" fxLayoutAlign="end start" class="m-t-10 m-b-10">
+            <button mat-raised-button color="primary" (click)="openDialog()">+ Add
+            </button>
+        </div>
+        <ng-container class="row" *ngFor="let _l of l">
+            <div fxFlex.gt-sm="100" fxLayout="row wrap" fxFlexAlign="center" class="row" fxFlex="100" class="p-10">
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Installment #." formControlName="secondCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Dege:" formControlName="secondCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Due Date:" formControlName="secondCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input matInput placeholder="Due Amount:" formControlName="secondCtrl"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex.gt-sm="100" fxFlex="100" fxLayoutAlign="end start" class="p-10">
+                    <div fxLayout="row wrap" fxFlexAlign="center" class="row" >
+                        <button mat-raised-button color="warn" (click)="openDialog()">delete
+                        </button>
+                    </div>
+                </div>
+            </div>            
+        </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #customerBuyerAdd>
+    <!-- ============================================================== -->
+    <!-- Card Grid-->
+    <!-- ============================================================== -->
+    <div fxLayout="row wrap">
+        <div fxFlex.gt-sm="100" fxFlex="100">
+            <mat-card>
+                <mat-card-content>
+                    <!-- <mat-card-title>Customer/Buyer</mat-card-title> -->
+                    <!-- ============================================================== -->
+                    <!-- column -->
+                    <!-- ============================================================== -->
+                    <form class="basic-form">
+                        <div fxLayout="row wrap" fxFlexAlign="center" class="row">
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="CNIC #.">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Exp Date:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Name:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Father/Husband Name:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Customer Id:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="75" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Present Address:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="City:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="State:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Country:">
+                                </mat-form-field>
+                            </div>
+
+                            <!-- column -->
+                            <mat-card-subtitle class="card_sub_heading">Payment Address:</mat-card-subtitle>
+                            <div fxFlex.gt-sm="100" fxFlex="100" class="m-t-10 m-b-10">
+                                <mat-checkbox color="primary" class="m-r-10" placeholder="Checkbox">Same as above
+                                </mat-checkbox>
+                                <button mat-raised-button color="primary"
+                                    (click)="samePaymentAddress = !samePaymentAddress">Add Payment
+                                    Address</button>
+                            </div>
+                            <div fxLayout="row wrap" fxFlex="100" *ngIf="!samePaymentAddress">
+                                <!-- column -->
+                                <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
+                                    <mat-form-field>
+                                        <input matInput placeholder="Payment Address">
+                                    </mat-form-field>
+                                </div>
+                                <!-- column -->
+                                <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                    <mat-form-field>
+                                        <input matInput placeholder="City">
+                                    </mat-form-field>
+                                </div>
+                                <!-- column -->
+                                <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                    <mat-form-field>
+                                        <input matInput placeholder="State">
+                                    </mat-form-field>
+                                </div>
+                                <!-- column -->
+                                <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                    <mat-form-field>
+                                        <input matInput placeholder="Country">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Mobile #.">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Home Phone #.">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Office Phone #.">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Email Address:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="DOB:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Nationality:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Passport #.">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Issuing Country:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Exp Date:">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Occupation:">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+
+                <mat-card-content>
+                    <mat-card-title>Nomine:</mat-card-title>
+                    <!-- ============================================================== -->
+                    <!-- column -->
+                    <!-- ============================================================== -->
+                    <form class="basic-form">
+                        <div fxLayout="row wrap" fxFlexAlign="center" class="row">
+                            <!-- column -->
+                            <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="CNIC #.">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Name">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                <mat-form-field>
+                                    <input matInput placeholder="Relation">
+                                </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <mat-card-subtitle class="card_sub_heading">Nominee Address:</mat-card-subtitle>
+                            <div fxFlex.gt-sm="100" fxFlex="100" class="m-t-10 m-b-10">
+                                <mat-checkbox color="primary" class="m-r-10" placeholder="Checkbox">Same as above
+                                </mat-checkbox>
+                                <button mat-raised-button color="primary"
+                                    (click)="sameNomineeAddress = !sameNomineeAddress">Add Nominee
+                                    Address</button>
+                            </div>
+                            <div fxLayout="row wrap" fxFlex="100" *ngIf="!sameNomineeAddress">
+                                <!-- column -->
+                                <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
+                                    <mat-form-field>
+                                        <input matInput placeholder="Payment Address">
+                                    </mat-form-field>
+                                </div>
+                                <!-- column -->
+                                <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                    <mat-form-field>
+                                        <input matInput placeholder="City">
+                                    </mat-form-field>
+                                </div>
+                                <!-- column -->
+                                <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                    <mat-form-field>
+                                        <input matInput placeholder="State">
+                                    </mat-form-field>
+                                </div>
+                                <!-- column -->
+                                <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
+                                    <mat-form-field>
+                                        <input matInput placeholder="Country">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+
+                <mat-card-content>
+                    <mat-card-title>Customer Documents:</mat-card-title>
+                    <!-- ============================================================== -->
+                    <!-- column -->
+                    <!-- ============================================================== -->
+                    <form class="basic-form">
+                        <div fxLayout="row wrap" fxFlexAlign="center" class="row">
+                            <!-- column -->
+                            <div fxFlex.gt-sm="21" fxFlex="100" class="p-10">
+                                <label for="">Upload Picture
+                                    <input class="form-control b-b" placeholder="Upload picture" type="file">
+                                </label>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="21" fxFlex="100" class="p-10">
+                                <label for="">CNIC Front Side:
+                                    <input class="form-control b-b" placeholder="CNIC Front Side" type="file">
+                                </label>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="21" fxFlex="100" class="p-10">
+                                <label for="">CNIC Back Side:
+                                    <input class="form-control b-b" placeholder="CNIC Back Side" type="file">
+                                </label>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="37" fxFlex="100" class="p-10">
+                                <label for="">Scanned Declaration (Signed Document)
+                                    <input class="form-control b-b" placeholder="Scanned Declaration" type="file">
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #customerBuyerDialog>
+    <h2 mat-dialog-title>Customer/Buyer</h2>
+    <mat-dialog-content class="mat-typography">
+        <ng-container *ngTemplateOutlet="customerBuyerAdd"></ng-container>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)='BuyerSave()'>Save</button>
+    </mat-dialog-actions>
+
+</ng-template>
