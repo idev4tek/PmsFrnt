@@ -430,11 +430,12 @@
                     <!-- column -->
                     <!-- ============================================================== -->
                     <form class="basic-form">
-                        <div fxLayout="row wrap" fxFlexAlign="center" class="row"  [formGroup]="addCustomerFormGroup">
+                        <div fxLayout="row wrap" fxFlexAlign="center" class="row" [formGroup]="addCustomerFormGroup">
                             <!-- column -->
                             <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
                                 <mat-form-field>
-                                    <input matInput (keypress)="onlyNumbers($event)" formControlName="cnic_nmbr" placeholder="CNIC #.">
+                                    <input matInput (keypress)="onlyNumbers($event)" formControlName="cnic_nmbr"
+                                        placeholder="CNIC #.">
                                 </mat-form-field>
                             </div>
                             <!-- column -->
@@ -450,13 +451,15 @@
                             <!-- column -->
                             <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
                                 <mat-form-field>
-                                    <input matInput placeholder="Name:" (keypress)="onlyLetters($event)" formControlName="cust_nm">
+                                    <input matInput placeholder="Name:" (keypress)="onlyLetters($event)"
+                                        formControlName="cust_nm">
                                 </mat-form-field>
                             </div>
                             <!-- column -->
                             <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
                                 <mat-form-field>
-                                    <input matInput placeholder="Father/Husband Name:" (keypress)="onlyLetters($event)" formControlName="fathr_hsbnd_nm">
+                                    <input matInput placeholder="Father/Husband Name:" (keypress)="onlyLetters($event)"
+                                        formControlName="fathr_hsbnd_nm">
                                 </mat-form-field>
                             </div>
                             <!-- column -->
@@ -475,31 +478,31 @@
                                 <!-- column -->
                                 <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
                                     <mat-form-field>
-                                        <input matInput placeholder="House #."  formControlName="hse_nmbr">
+                                        <input matInput placeholder="House #." formControlName="hse_nmbr">
                                     </mat-form-field>
                                 </div>
                                 <!-- column -->
                                 <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
                                     <mat-form-field>
-                                        <input matInput placeholder="Street Name:"  formControlName="strt_nm">
+                                        <input matInput placeholder="Street Name:" formControlName="strt_nm">
                                     </mat-form-field>
                                 </div>
                                 <!-- column -->
                                 <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
                                     <mat-form-field>
-                                        <input matInput placeholder="City:"  formControlName="cty_key">
+                                        <input matInput placeholder="City:" formControlName="cty_key">
                                     </mat-form-field>
                                 </div>
                                 <!-- column -->
                                 <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
                                     <mat-form-field>
-                                        <input matInput placeholder="State:"  formControlName="stt_key">
+                                        <input matInput placeholder="State:" formControlName="stt_key">
                                     </mat-form-field>
                                 </div>
                                 <!-- column -->
                                 <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
                                     <mat-form-field>
-                                        <input matInput placeholder="Country:"  formControlName="cntry_key">
+                                        <input matInput placeholder="Country:" formControlName="cntry_key">
                                     </mat-form-field>
                                 </div>
                                 <!-- column -->
@@ -507,7 +510,7 @@
                                     <mat-form-field>
                                         <input matInput placeholder="Other Details:" formControlName="oth_dtl">
                                     </mat-form-field>
-                                </div>                                
+                                </div>
                             </ng-container>
                             <!-- column -->
                             <mat-card-subtitle class="card_sub_heading">Payment Address:</mat-card-subtitle>
@@ -623,7 +626,7 @@
                     <!-- column -->
                     <!-- ============================================================== -->
                     <form class="basic-form">
-                        <div fxLayout="row wrap" fxFlexAlign="center" class="row" [formGroup]="addCustomerFormGroup" >
+                        <div fxLayout="row wrap" fxFlexAlign="center" class="row" [formGroup]="addCustomerFormGroup">
                             <!-- column -->
                             <div fxFlex.gt-sm="33.33" fxFlex="100" class="p-10">
                                 <mat-form-field>
@@ -688,7 +691,7 @@
                     <!-- column -->
                     <!-- ============================================================== -->
                     <form class="basic-form">
-                        <div fxLayout="row wrap" fxFlexAlign="center" class="row" [formGroup]="addCustomerFormGroup" >
+                        <div fxLayout="row wrap" fxFlexAlign="center" class="row" [formGroup]="addCustomerFormGroup">
                             <!-- column -->
                             <div fxFlex.gt-sm="33" fxFlex="100" class="p-10">
                                 <label for="">Upload Picture
@@ -910,23 +913,39 @@
 <ng-template #addDistributionDialog let-data>
     <h2 mat-dialog-title>Distribution</h2>
     <mat-dialog-content class="mat-typography">
-        <ng-container *ngFor="let dst of data.dst">
-            <span *ngIf="dst.prd_ip_typ_key==1">Yearly</span>
-            <span *ngIf="dst.prd_ip_typ_key==2">Bi-anually</span>
-            <span *ngIf="dst.prd_ip_typ_key==3">Quarterly</span>
-            <span *ngIf="dst.prd_ip_typ_key==4">Monthly</span>
-            <mat-slider #slidey color="primary" [(ngModel)]="dst.prd_ip_typ_prcnt_vlu"
+        <div fxLayout="row wrap" fxFlexAlign="center" class="row">
+            <ng-container *ngFor="let dst of data.dst">
+                <!-- <span *ngIf="dst.prd_ip_typ_key==1">Yearly</span>
+                <span *ngIf="dst.prd_ip_typ_key==2">Bi-anually</span>
+                <span *ngIf="dst.prd_ip_typ_key==3">Quarterly</span>
+                <span *ngIf="dst.prd_ip_typ_key==4">Monthly</span>
+                -->
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <mat-label *ngIf="dst.prd_ip_typ_key==1">Yearly:</mat-label>
+                        <mat-label *ngIf="dst.prd_ip_typ_key==2">Bi-anually:</mat-label>
+                        <mat-label *ngIf="dst.prd_ip_typ_key==3">Quarterly:</mat-label>
+                        <mat-label *ngIf="dst.prd_ip_typ_key==4">Monthly:</mat-label>
+
+                        <input matInput [(ngModel)]="dst.prd_ip_typ_prcnt_vlu" (keypress)="onlyNumbers($event)"
+                            (ngModelChange)="updateSegrigatoinValueViaDistribution(data.sgr,dst.prd_ip_typ_key,dst.prd_ip_typ_prcnt_vlu)">
+                    </mat-form-field>
+                </div>
+
+                <!-- <mat-slider #slidey color="primary" [(ngModel)]="dst.prd_ip_typ_prcnt_vlu"  (keypress)="onlyNumbers($event)" 
                 (ngModelChange)="updateSegrigatoinValueViaDistribution(data.sgr,dst.prd_ip_typ_key,dst.prd_ip_typ_prcnt_vlu)">
-            </mat-slider>
-            {{slidey.value}} <br>
-        </ng-container>
+            </mat-slider> -->
+                <!-- {{slidey.value}} <br> -->
+            </ng-container>
+        </div>
 
         <mat-chip-list *ngIf="!distributionSum100(data.dst)">
             <mat-chip color="warn" selected="true">Sum of all values should be 100</mat-chip>
         </mat-chip-list>
     </mat-dialog-content>
     <mat-dialog-actions align="end" *ngIf="distributionSum100(data.dst)">
-        <button mat-button mat-dialog-close (click)='logChanges()'>Cancel</button>
+        <button mat-button mat-dialog-close (click)='logChanges()'>Save</button>
     </mat-dialog-actions>
 </ng-template>
 

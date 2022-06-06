@@ -34,13 +34,19 @@ const MENUITEMS = [
     {
         state: 'dashboards',
         name: 'Dashboards',
-        type: 'sub',
-        icon: 'av_timer',
-        children: [
-            { state: 'dashboard1', name: 'Dashboard 1', type: 'link' },
-            { state: 'dashboard2', name: 'Dashboard 2', type: 'link' }
-        ]
+        type: 'link',
+        icon: 'av_timer'
     },
+    // {
+    //     state: 'dashboards',
+    //     name: 'Dashboards',
+    //     type: 'sub',
+    //     icon: 'av_timer',
+    //     children: [
+    //         { state: 'dashboard1', name: 'Dashboard 1', type: 'link' },
+    //         { state: 'dashboard2', name: 'Dashboard 2', type: 'link' }
+    //     ]
+    // },
     {
         state: 'booking',
         name: 'Booking',

@@ -10,6 +10,13 @@ export const AppRoutes: Routes = [
         component: FullComponent,
         canActivate: [AuthGuard],
         children: [
+            //new
+            {
+                path: '',
+                redirectTo: '/dashboards',
+                pathMatch: 'full'
+            },
+            //old
             {
                 path: '',
                 redirectTo: '/dashboards/dashboard1',

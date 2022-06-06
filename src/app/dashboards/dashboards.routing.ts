@@ -8,6 +8,16 @@ export const DashboardsRoutes: Routes = [
     path: '',
     children: [
       {
+        path: '',
+        component: Dashboard1Component,
+		data: {
+          title: 'Dashboard',
+          urls: [
+            { title: 'Dashboard', url: '/dashboards' }
+          ]
+        }
+      },
+      {
         path: 'dashboard1',
         component: Dashboard1Component,
 		data: {
