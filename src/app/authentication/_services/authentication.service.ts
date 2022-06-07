@@ -29,7 +29,7 @@ export class AuthenticationService {
 
         let body = `grant_type=${grant_type}&client_id=${client_id}&client_seret=${client_seret}&username=${username}&password=${password}`;
         
-        return this.http.post<any>(`/_auth/realms/Doms/protocol/openid-connect/token`, 
+        return this.http.post<any>(`http://144.217.155.167:8085/auth/realms/Doms/protocol/openid-connect/token`, 
          body, options)
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
