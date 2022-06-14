@@ -39,20 +39,27 @@ export class LoginComponent implements OnInit {
       return;
   }
 
+  let t = this.autService.fakeLogin("null","null")
+  if(t.access_token){
+      this.router.navigate([this.returnUrl]);
+  }else{
+    console.log("login Error");
+    
+  }
 
-    this.autService.login(this.f.uname.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          console.log(error);
-          // if(error&&error.error&&error.error_description)          
-          //   this.msg =error.error.error_description;
-          // else
-          //   this.msg =JSON.stringify(error.error);
-        });
+    // this.autService.login(this.f.uname.value, this.f.password.value)
+    //   .pipe(first())
+    //   .subscribe(
+    //     data => {
+    //       this.router.navigate([this.returnUrl]);
+    //     },
+    //     error => {
+    //       console.log(error);
+    //       // if(error&&error.error&&error.error_description)          
+    //       //   this.msg =error.error.error_description;
+    //       // else
+    //       //   this.msg =JSON.stringify(error.error);
+    //     });
     // this.router.navigate(['/dashboards/dashboard1']);
   }
 }

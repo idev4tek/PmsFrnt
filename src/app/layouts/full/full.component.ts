@@ -29,7 +29,7 @@ export class FullComponent implements OnDestroy {
   boxed = false;
   danger = false;
   showHide = false;
-  horizontal = false;
+  horizontal = true;
   url = '';
   sidebarOpened = false;
   status = false;
@@ -50,7 +50,7 @@ export class FullComponent implements OnDestroy {
     media: MediaMatcher,
     public menuItems: MenuItems
   ) {
-    this.mobileQuery = media.matchMedia('(min-width: 1023px)');
+    this.mobileQuery = media.matchMedia('(min-width: 280px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
     this.mobileQuery.addListener(this._mobileQueryListener);

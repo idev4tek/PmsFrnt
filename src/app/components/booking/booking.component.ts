@@ -1,3 +1,4 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { Component, AfterViewInit, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
@@ -48,10 +49,10 @@ export class BookingComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'gender', 'age', 'action'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
 
-  presetSegrigation :any[]=[];
-  presetDistribution :any[]=[];
+  presetSegrigation: any[] = [];
+  presetDistribution: any[] = [];
 
-  constructor(private _formBuilder: FormBuilder, public dialog: MatDialog) {
+  constructor(private _formBuilder: FormBuilder, public dialog: MatDialog, private overlay: Overlay) {
     this.customTemplate = Object.create(null);
 
     this.rows = this._data;
@@ -87,24 +88,22 @@ export class BookingComponent implements OnInit, AfterViewInit {
       secondCtrl: ['', Validators.required]
     });
     this.addCustomerFormGroup = this._formBuilder.group({
-      cnic_nmbr: ['', Validators.required],
-      cnic_expry_dt: ['', Validators.required],
+      cnicNumber: ['', Validators.required],
+      cnicExpiryDate: ['', Validators.required],
       cust_nm: ['', Validators.required],
-      fathr_hsbnd_nm: ['', Validators.required],
-      cust_id: ['', Validators.required],
-      dob: ['', Validators.required],
-      occ_key: ['', Validators.required],//occupation
-      nlty_key: ['', Validators.required],//nationality
-      pspt_nmbr: ['', Validators.required],//passport number
-      pspt_isu_cntry: ['', Validators.required],//passport issue country
-      pspt_expry_dt: ['', Validators.required],//passport expiry
-      prm_phon_nmbr: ['', Validators.required],// phone office
-      scndry_phon_nmbr: ['', Validators.required],//phone home
-      email_addr: ['', Validators.required],//email
-      hse_nmbr: ['', Validators.required],// house number
-      strt_nm: ['', Validators.required],// street number
-      oth_dtl: ['', Validators.required],// other details
-      preasent_address: this._formBuilder.group({
+      fatherSpouseName: ['', Validators.required],
+      customerId: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      occupationKey: ['', Validators.required],//occupation
+      nationalityKey: ['', Validators.required],//nationality
+      passportNumber: ['', Validators.required],//passport number
+      issueCountryKey: ['', Validators.required],//passport issue country
+      passportExpiryDate: ['', Validators.required],//passport expiry
+      primaryPhoneNumber: ['', Validators.required],// phone office
+      secondaryPhoneNumber: ['', Validators.required],//phone home
+      emailAddress: ['', Validators.required],//email
+      paymentAddressSameAsPermanentAddress: [true],//paymentaddress checkbox
+      present_address: this._formBuilder.group({
         address: ['', Validators.required],
         cty_key: ['', Validators.required],
         stt_key: ['', Validators.required],
@@ -113,20 +112,21 @@ export class BookingComponent implements OnInit, AfterViewInit {
         strt_nm: ['', Validators.required],
         oth_dtl: ['', Validators.required],
       }),
-      payment_address : [],
-      nom_cnic_nmbr:['', Validators.required],
+      payment_address: new FormGroup({}),
+      nom_cnic_nmbr: ['', Validators.required],
       // nominee name where??
-      nom_name : [""],
-      rltn_key:['', Validators.required],
-      nominee_address : [],
+      nom_name: [""],
+      rltn_key: ['', Validators.required],
+      nomineeAddressSameAsPermanentAddress: [true],//paymentaddress checkbox
+      nominee_address: new FormGroup({}),
       //must have in address
-//       hse_nmbr varchar(25) 
-//       strt_nm varchar(50) 
-//       oth_dtl varchar(100) 
-//       cty_key
+      //       hse_nmbr varchar(25) 
+      //       strt_nm varchar(50) 
+      //       oth_dtl varchar(100) 
+      //       cty_key
       doc: this._formBuilder.group({
-        doc_key:['', Validators.required],
-        doc:['', Validators.required],
+        doc_key: ['', Validators.required],
+        doc: ['', Validators.required],
       })
 
       // cust_nm: ['', Validators.required],
@@ -145,8 +145,8 @@ export class BookingComponent implements OnInit, AfterViewInit {
       actualAmount: ["", [Validators.required]],
       paymentScheme: ["", [Validators.required]],
       status: ["", [Validators.required]],
-      dst:[],
-      sgr:[]
+      dst: [],
+      sgr: []
     })
 
     this.discountsFormGroup = this._formBuilder.group({
@@ -156,12 +156,13 @@ export class BookingComponent implements OnInit, AfterViewInit {
       calculateAmount: ["", [Validators.required]],
       actualAmount: ["", [Validators.required]],
       status: ["", [Validators.required]],
-      dst:[],
-      sgr:[]
+      dst: [],
+      sgr: []
     })
 
     this.addReactiveFormValues()
     this.addDistributioAndSegrigation();
+    this.addOrRemoveReacticeFormValueViaAnotherReactiveValue()
   }
 
   addReactiveFormValues() {
@@ -177,10 +178,12 @@ export class BookingComponent implements OnInit, AfterViewInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(this.customTemplate, {
-      width: '100%'
+      width: '100%',
+      panelClass: "dialogBackground",
+      scrollStrategy: this.overlay.scrollStrategies.block()
     });
 
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe((x) => {
       console.log('The dialog was closed');
     });
   }
@@ -251,14 +254,14 @@ export class BookingComponent implements OnInit, AfterViewInit {
   }
 
 
-  _openDialog(temp: TemplateRef<any>, data=null as any): void {
-    let options =  {
+  _openDialog(temp: TemplateRef<any>, data = null as any): void {
+    let options = {
       width: '100%',
       data,
-      disableClose :false
+      disableClose: false
     }
-    if(data){options['disableClose']=true}
-    const dialogRef = this.dialog.open(temp,options);
+    if (data) { options['disableClose'] = true }
+    const dialogRef = this.dialog.open(temp, options);
 
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
@@ -327,7 +330,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
       this.discountsFormGroup.get("status")?.patchValue(this.discountsArray[index]['status']);
       this.discountsFormGroup.get("dst")?.patchValue(this.discountsArray[index]['dst']);
       this.discountsFormGroup.get("sgr")?.patchValue(this.discountsArray[index]['sgr']);
-    }else{
+    } else {
       //new entry
       this.discountsFormGroup.get("dst")?.patchValue(JSON.parse(JSON.stringify(this.presetDistribution)));
       this.discountsFormGroup.get("sgr")?.patchValue(JSON.parse(JSON.stringify(this.presetSegrigation)));
@@ -363,19 +366,19 @@ export class BookingComponent implements OnInit, AfterViewInit {
     }
   }
 
-  openSegrigationDialog(temp: TemplateRef<any>, data=null as any){
+  openSegrigationDialog(temp: TemplateRef<any>, data = null as any) {
     console.log(data);
-    
-    if(data) this._openDialog(temp,data);
+
+    if (data) this._openDialog(temp, data);
     else this._openDialog(temp);
   }
 
   addDistributioAndSegrigation() {
     //segrigation
     this.prd_ip_mnth;
-    let qauterInMonth = this.prd_ip_mnth/3;
-    let byAnualsInMonth = this.prd_ip_mnth/6;
-    let yearsInMonth = this.prd_ip_mnth/12;
+    let qauterInMonth = this.prd_ip_mnth / 3;
+    let byAnualsInMonth = this.prd_ip_mnth / 6;
+    let yearsInMonth = this.prd_ip_mnth / 12;
 
     //prd_ip_typ_key
     //month = 4
@@ -792,72 +795,72 @@ export class BookingComponent implements OnInit, AfterViewInit {
     }
     ]
 
-    let sgrYearly = prd_ip_dtl.filter(x=>x.prd_ip_typ_key as any==1)
-    let sgrByAnually = prd_ip_dtl.filter(x=>x.prd_ip_typ_key as any==2)
-    let sgrQuaterly = prd_ip_dtl.filter(x=>x.prd_ip_typ_key as any==3)
-    let sgrMonthly = prd_ip_dtl.filter(x=>x.prd_ip_typ_key as any==4)
+    let sgrYearly = prd_ip_dtl.filter(x => x.prd_ip_typ_key as any == 1)
+    let sgrByAnually = prd_ip_dtl.filter(x => x.prd_ip_typ_key as any == 2)
+    let sgrQuaterly = prd_ip_dtl.filter(x => x.prd_ip_typ_key as any == 3)
+    let sgrMonthly = prd_ip_dtl.filter(x => x.prd_ip_typ_key as any == 4)
     let _sgrYearly = [] as any;
     let _sgrByAnually = [] as any;
     let _sgrQuaterly = [] as any;
     let _sgrMonthly = [] as any;
 
     for (let i = 0; i < (this.prd_ip_mnth); i++) {
-      if(sgrMonthly[i]&&sgrMonthly[i]?.prd_ip_typ_key){
-        _sgrMonthly.push({prd_ip_typ_key:sgrMonthly[i].prd_ip_typ_key,inst_nmbr:i+1, code :sgrMonthly[i].prd_ip_typ_key} as any);
+      if (sgrMonthly[i] && sgrMonthly[i]?.prd_ip_typ_key) {
+        _sgrMonthly.push({ prd_ip_typ_key: sgrMonthly[i].prd_ip_typ_key, inst_nmbr: i + 1, code: sgrMonthly[i].prd_ip_typ_key } as any);
       }
-      else{
-        _sgrMonthly.push({prd_ip_typ_key:-4,inst_nmbr:i+1, code :4} as any);
+      else {
+        _sgrMonthly.push({ prd_ip_typ_key: -4, inst_nmbr: i + 1, code: 4 } as any);
       }
-   }
-   for (let i = 0; i < (qauterInMonth); i++) {
-      if(sgrQuaterly[i]&&sgrQuaterly[i]?.prd_ip_typ_key){
-        _sgrQuaterly.push({prd_ip_typ_key:sgrQuaterly[i].prd_ip_typ_key,inst_nmbr:i+1, code :sgrQuaterly[i].prd_ip_typ_key} as any);
+    }
+    for (let i = 0; i < (qauterInMonth); i++) {
+      if (sgrQuaterly[i] && sgrQuaterly[i]?.prd_ip_typ_key) {
+        _sgrQuaterly.push({ prd_ip_typ_key: sgrQuaterly[i].prd_ip_typ_key, inst_nmbr: i + 1, code: sgrQuaterly[i].prd_ip_typ_key } as any);
       }
-      else{
-        _sgrQuaterly.push({prd_ip_typ_key:-3,inst_nmbr:i+1, code :3} as any);
+      else {
+        _sgrQuaterly.push({ prd_ip_typ_key: -3, inst_nmbr: i + 1, code: 3 } as any);
       }
-   }
-   for (let i = 0; i < (byAnualsInMonth); i++) {
-      if(sgrByAnually[i]&&sgrByAnually[i]?.prd_ip_typ_key){
-        _sgrByAnually.push({prd_ip_typ_key:sgrByAnually[i].prd_ip_typ_key,inst_nmbr:i+1, code :sgrByAnually[i].prd_ip_typ_key} as any);
+    }
+    for (let i = 0; i < (byAnualsInMonth); i++) {
+      if (sgrByAnually[i] && sgrByAnually[i]?.prd_ip_typ_key) {
+        _sgrByAnually.push({ prd_ip_typ_key: sgrByAnually[i].prd_ip_typ_key, inst_nmbr: i + 1, code: sgrByAnually[i].prd_ip_typ_key } as any);
       }
-      else{
-        _sgrByAnually.push({prd_ip_typ_key:-2,inst_nmbr:i+1, code :2} as any);
+      else {
+        _sgrByAnually.push({ prd_ip_typ_key: -2, inst_nmbr: i + 1, code: 2 } as any);
       }
-   }
-   for (let i = 0; i < (yearsInMonth); i++) {
-      if(sgrYearly[i]&&sgrYearly[i]?.prd_ip_typ_key){
-        _sgrYearly.push({prd_ip_typ_key:sgrYearly[i].prd_ip_typ_key,inst_nmbr:i+1, code :sgrYearly[i].prd_ip_typ_key} as any);
+    }
+    for (let i = 0; i < (yearsInMonth); i++) {
+      if (sgrYearly[i] && sgrYearly[i]?.prd_ip_typ_key) {
+        _sgrYearly.push({ prd_ip_typ_key: sgrYearly[i].prd_ip_typ_key, inst_nmbr: i + 1, code: sgrYearly[i].prd_ip_typ_key } as any);
       }
-      else{
-        _sgrYearly.push({prd_ip_typ_key:-1,inst_nmbr:i+1, code :1} as any);
+      else {
+        _sgrYearly.push({ prd_ip_typ_key: -1, inst_nmbr: i + 1, code: 1 } as any);
       }
-   }
+    }
 
-   prd_ip_dtl = [..._sgrYearly,..._sgrByAnually,..._sgrQuaterly,..._sgrMonthly]
-   this.presetSegrigation = prd_ip_dtl;
-   this.presetDistribution = prd_chrg_ip_dst;
+    prd_ip_dtl = [..._sgrYearly, ..._sgrByAnually, ..._sgrQuaterly, ..._sgrMonthly]
+    this.presetSegrigation = prd_ip_dtl;
+    this.presetDistribution = prd_chrg_ip_dst;
 
     for (let i = 0; i < this.discountsArray.length; i++) {
       this.discountsArray[i].dst = JSON.parse(JSON.stringify(prd_chrg_ip_dst));
       this.discountsArray[i].sgr = JSON.parse(JSON.stringify(prd_ip_dtl));
-      
+
     }
 
     for (let i = 0; i < this.chargesArray.length; i++) {
       this.chargesArray[i].dst = JSON.parse(JSON.stringify(prd_chrg_ip_dst));
       this.chargesArray[i].sgr = JSON.parse(JSON.stringify(prd_ip_dtl));
-      
+
     }
 
 
   }
 
 
-  updateSegrigatoinValueViaDistribution(SgrArray:any[],installmentPlanKey:any,distributionValue:any){
-    if((distributionValue<=0)&&installmentPlanKey){
-      SgrArray.map(x=>{
-        if(x.code==installmentPlanKey&&x.prd_ip_typ_key>0){
+  updateSegrigatoinValueViaDistribution(SgrArray: any[], installmentPlanKey: any, distributionValue: any) {
+    if ((distributionValue <= 0) && installmentPlanKey) {
+      SgrArray.map(x => {
+        if (x.code == installmentPlanKey && x.prd_ip_typ_key > 0) {
           x.prd_ip_typ_key *= -1;
         }
         return x;
@@ -865,44 +868,96 @@ export class BookingComponent implements OnInit, AfterViewInit {
     }
   }
 
-  SegregationVaisibilityViaDistribution(DistributionArray:any[],installmentPlanKey:any){
-    let t = DistributionArray.find(x=>x.prd_ip_typ_key==installmentPlanKey);
-    if(t?.prd_ip_typ_key&&t?.prd_ip_typ_prcnt_vlu>0){
+  SegregationVaisibilityViaDistribution(DistributionArray: any[], installmentPlanKey: any) {
+    let t = DistributionArray.find(x => x.prd_ip_typ_key == installmentPlanKey);
+    if (t?.prd_ip_typ_key && t?.prd_ip_typ_prcnt_vlu > 0) {
       return true;
     }
     else return false;
 
   }
-  
-  fun(event:any) {
+
+  fun(event: any) {
     //toggle
     if (event.prd_ip_typ_key >= 1) event.prd_ip_typ_key *= -1;
     else event.prd_ip_typ_key *= -1;
   }
 
-  check(event:any) {
-    if (event >0) return true;
+  check(event: any) {
+    if (event > 0) return true;
     else return false;
   }
 
-  logChanges(){
+  logChanges() {
     console.log(this.chargesArray[0].dst)
   }
 
-  distributionSum100(dst:any[]){
+  distributionSum100(dst: any[]) {
 
     let sum = 0;
     dst.forEach(x => {
       let value = Number(x.prd_ip_typ_prcnt_vlu)
-      sum+=value
+      sum += value
     });
-    if(sum==100){
+    if (sum == 100) {
       return true;
     }
-    else{
-      
+    else {
+
       return false;
     }
+  }
+
+  addOrRemoveReacticeFormValueViaAnotherReactiveValue() {
+    this.addCustomerFormGroup.get('paymentAddressSameAsPermanentAddress')?.valueChanges.subscribe(x => {
+      if (x) {
+        this.samePaymentAddress = !this.samePaymentAddress;
+        let zxz = ['address', "cty_key", 'stt_key', 'cntry_key', 'hse_nmbr', 'strt_nm', 'oth_dtl']
+        let payment_address = (this.addCustomerFormGroup.get('payment_address') as FormGroup)
+        zxz.forEach(zx => {
+          payment_address.removeControl(zx + "");
+        });
+
+      }
+      else {
+        let payment_address = (this.addCustomerFormGroup.get('payment_address') as FormGroup)
+        
+        payment_address.addControl('address', new FormControl("", [Validators.required]))
+        payment_address.addControl('cty_key', new FormControl("", [Validators.required]))
+        payment_address.addControl('stt_key', new FormControl("", [Validators.required]))
+        payment_address.addControl('cntry_key', new FormControl("", [Validators.required]))
+        payment_address.addControl('hse_nmbr', new FormControl("", [Validators.required]))
+        payment_address.addControl('strt_nm', new FormControl("", [Validators.required]))
+        payment_address.addControl('oth_dtl', new FormControl("", [Validators.required]))
+
+        this.samePaymentAddress = x;
+      }
+    });
+
+    this.addCustomerFormGroup.get('nomineeAddressSameAsPermanentAddress')?.valueChanges.subscribe(x => {
+      if (x) {
+        this.sameNomineeAddress = !this.sameNomineeAddress;
+        let zxz = ['address', "cty_key", 'stt_key', 'cntry_key', 'hse_nmbr', 'strt_nm', 'oth_dtl']
+        let nominee_address = (this.addCustomerFormGroup.get('nominee_address') as FormGroup)
+        zxz.forEach(zx => {
+          nominee_address.removeControl(zx + "");
+        });
+
+      }
+      else {
+        let nominee_address = (this.addCustomerFormGroup.get('nominee_address') as FormGroup)
+        let zxz = ['address', "cty_key", 'stt_key', 'cntry_key', 'hse_nmbr', 'strt_nm', 'oth_dtl']
+        zxz.forEach(zx => {
+          nominee_address.addControl(zx+'', new FormControl("", [Validators.required]))
+        });
+
+        setTimeout(() => {
+          this.sameNomineeAddress = x;
+          
+        }, 200);
+      }
+    });
+    
   }
 
   //to helper
